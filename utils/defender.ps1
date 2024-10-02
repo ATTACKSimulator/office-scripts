@@ -10,7 +10,7 @@ function addIpsToConnectionFilterPolicy {
         Set-HostedConnectionFilterPolicy -Identity Default -IPAllowList ($defaultPolicy.IPAllowList + $ips | Select-Object -Unique)
         Write-Host "Updated the default Connection Filter Policy with the new allowed IPs." -ForegroundColor green
     } else {
-        throw "No default Connection Filter Policy found." -ForegroundColor red
+        throw "No default Connection Filter Policy found."
     }
 }
 

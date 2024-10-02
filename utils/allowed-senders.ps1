@@ -22,7 +22,7 @@ function removeAllowedSenders {
         [string[]]$domains
     )   
 
-    defaultPolicy = Get-HostedContentFilterPolicy -Identity Default
+    $defaultPolicy = Get-HostedContentFilterPolicy -Identity Default
     if ($defaultPolicy) {
         # Remove the domains to the Allowed Senders and Domains list
         Write-Host "Removing domains: $domains"
