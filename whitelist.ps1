@@ -14,7 +14,12 @@ $landingDomains = downloadLandingDomains
 
 connect
 
-addAllowedSenders -domains ($emailDomains + $landingDomains)
-addTransportRule
-addSafeSenders -domains ($emailDomains + $landingDomains)
-addDefender -ips $ips -emailDomains $emailDomains -landingDomains $landingDomains
+try {
+    addAllowedSenders -domains ($emailDomains + $landingDomains)
+    addTransportRule
+    addSafeSenders -domains ($emailDomains + $landingDomains)
+    addDefender -ips $ips -emailDomains $emailDomains -landingDomains $landingDomains
+} catch {
+    Write-Host $_ -ForegroundColor red
+    Write-Host "An error occurred. Please try again." -ForegroundColor red
+}
