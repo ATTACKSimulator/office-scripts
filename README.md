@@ -1,8 +1,8 @@
 # ATTACK Simulator Office Scripts
 
-Welcome to the ATTACK Simulator Office Scripts repository! This project offers a collection of PowerShell scripts tailored for managing and configuring spam filter policies, safe senders, and transport rules within Microsoft 365 environments. These tools are invaluable for simulating phishing scenarios and enhancing your organization’s email security. The latest ATTACK Simulator domains are automatically downloaded as needed, ensuring you always have the most up-to-date information.
+Welcome to the ATTACK Simulator Office Scripts repository!
 
-**Microsoft Defender scripts coming soon.**
+This project offers a collection of PowerShell scripts tailored for managing and configuring spam filter policies, safe senders, and transport rules within Microsoft 365 environments. These tools are invaluable for simulating phishing scenarios and enhancing your organization’s email security. The latest ATTACK Simulator domains are automatically downloaded as needed, ensuring you always have the most up-to-date information.
 
 ## Table of Contents
 
@@ -23,8 +23,8 @@ The ATTACK Simulator Office Scripts repository provides a suite of PowerShell sc
 Before using these scripts, ensure you have:
 
 - A Microsoft 365 account with appropriate permissions.
-- PowerShell with the Exchange Online Management Module installed.
-- Basic knowledge of PowerShell scripting.
+- The latest PowerShell installed on Windows or Mac
+- Minimal knowledge of terminal commands (like changing directories and running a script).
 
 ## Scripts Overview
 
@@ -48,9 +48,15 @@ This repository includes the following scripts:
 - **`_transport-rule-check.ps1`**: Checks the existence and details of a specified transport rule.
 - **`_transport-rule-remove.ps1`**: Removes a specified transport rule.
 
+### Defender Scripts
+
+- **`_defender-add.ps1`**: Adds a rules to Microsoft 365 Defender.
+- **`_defender-check.ps1`**: Checks the existence of the required rules in Microsoft 365 Defender.
+- **`_defender-remove.ps1`**: Removes ATTACK Simulator rules from Microsoft 365 Defender.
+
 ### General Scripts
 
-- **`whitelist.ps1`**: A general-purpose script for adding all ATTACK Simulator whitelist settings. It combines the \_allowed-senders-add.ps1, \_safe-senders-add.ps1 and \_transport-rule-add.ps1 scripts.
+- **`whitelist.ps1`**: A general-purpose script for adding all ATTACK Simulator whitelist settings. It combines the \_allowed-senders-add.ps1, \_safe-senders-add.ps1, \_transport-rule-add.ps1 and \_defender-add.ps1 scripts.
 
 ## Usage
 
@@ -61,18 +67,22 @@ This repository includes the following scripts:
    cd office-scripts
    ```
 
+   You can also download the repository, by clicking the green Code button and then **Download as zip**.
+
 2. **Run the Scripts:**
 
-   Open PowerShell and execute the desired script. For example, to apply all whitelisting settings type:
+   In PowerShell, navigate to the folder where you downloaded the repo, and execute the desired script.
+
+   For example, to apply all whitelisting settings type:
 
    ```powershell
-   .\whitelist.ps1
+   ./whitelist.ps1
    ```
 
    You can also run individual scripts if needed. If you want to remove all the ATTACK Simulator domains from the allowed senders list just type:
 
    ```powershell
-   .\_allowed-senders-remove.ps1
+   ./_allowed-senders-remove.ps1
    ```
 
 3. **Monitor and Review:**
