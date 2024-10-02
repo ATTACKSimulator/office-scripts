@@ -10,7 +10,7 @@ function addIpsToConnectionFilterPolicy {
         Set-HostedConnectionFilterPolicy -Identity Default -IPAllowList ($defaultPolicy.IPAllowList + $ips | Select-Object -Unique)
         Write-Host "Updated the default Connection Filter Policy with the new allowed IPs." -ForegroundColor green
     } else {
-        Write-Host "No default Connection Filter Policy found." -ForegroundColor red
+        throw "No default Connection Filter Policy found." -ForegroundColor red
     }
 }
 
@@ -48,7 +48,7 @@ function checkIpsInConnectionFilterPolicy {
             Write-Host "All IP addresses are added to the Connection Filter Policy." -ForegroundColor green
         }
     } else {
-        Write-Host "No default Connection Filter Policy found." -ForegroundColor red
+        throw "No default Connection Filter Policy found."
     }
 }
 
@@ -161,7 +161,7 @@ function checkAdvancedDeliverySettings {
         }
 
     } else {
-        Write-Host "No existing simulation found." -ForegroundColor red
+        throw "No existing simulation found."
     }
 }
 
