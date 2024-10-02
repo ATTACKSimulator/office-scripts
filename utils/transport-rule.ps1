@@ -18,9 +18,9 @@ function addTransportRule {
         -Priority $priority `
         -Mode $mode `
         -Comments $comments
-        Write-Host "The transport rule '$ruleName' has been created."
+        Write-Host "The transport rule '$ruleName' has been created." -ForegroundColor green
     } else {
-        Write-Host "The transport rule '$ruleName' already exists."
+        Write-Host "The transport rule '$ruleName' already exists." -ForegroundColor yellow
     }
 }
 
@@ -31,9 +31,9 @@ function checkTransportRule {
 
     $rule = Get-TransportRule -Identity $ruleName -ErrorAction SilentlyContinue
     if ($rule -eq $null) {
-        Write-Host "The transport rule '$ruleName' does not exist."
+        Write-Host "The transport rule '$ruleName' does not exist." -ForegroundColor red
     } else {
-        Write-Host "The transport rule '$ruleName' exists."
+        Write-Host "The transport rule '$ruleName' exists." -ForegroundColor green
 
         # Display the transport rule details
         $rule | Format-List
@@ -47,10 +47,10 @@ function removeTransportRule {
 
     $rule = Get-TransportRule -Identity $ruleName -ErrorAction SilentlyContinue
     if ($rule -eq $null) {
-        Write-Host "The transport rule '$ruleName' does not exist."
+        Write-Host "The transport rule '$ruleName' does not exist." -ForegroundColor red
     } else {
         Write-Host "Removing the transport rule '$ruleName'..."
         Remove-TransportRule -Identity $ruleName -Confirm:$false
-        Write-Host "The transport rule '$ruleName' has been removed."
+        Write-Host "The transport rule '$ruleName' has been removed." -ForegroundColor green
     }
 }

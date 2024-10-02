@@ -3,13 +3,8 @@ function addSafeSenders {
         [string[]]$domains
     )
 
-    Write-Host "Adding the following domains to the safe senders list: $($domains -join ', ')"
     Get-Mailbox | Set-MailboxJunkEmailConfiguration -TrustedSendersAndDomains @{Add=$domains}
-
-    # #add *@ prefix to each domain
-    # $domainsWithPrefix = $domains | ForEach-Object { "*@$_" }
-    # Write-Host "Adding the following domains to the safe senders list: $($domainsWithPrefix -join ', ')"
-    # Get-Mailbox | Set-MailboxJunkEmailConfiguration -TrustedSendersAndDomains @{Add=$domainsWithPrefix}
+    Write-Host "The following domains have been added to the safe senders list: $($domains -join ', ')" -ForegroundColor green
 }
 
 function checkSafeSenders {
@@ -38,11 +33,6 @@ function removeSafeSenders {
         [string[]]$domains
     )
 
-    Write-Host "Removing the following domains from the safe senders list: $($domains -join ', ')"
     Get-Mailbox | Set-MailboxJunkEmailConfiguration -TrustedSendersAndDomains @{Remove=$domains}
-
-    # #add *@ prefix to each domain
-    # $domainsWithPrefix = $domains | ForEach-Object { "*@$_" }
-    # Write-Host "Removing the following domains from the safe senders list: $($domainsWithPrefix -join ', ')"
-    # Get-Mailbox | Set-MailboxJunkEmailConfiguration -TrustedSendersAndDomains @{Remove=$domainsWithPrefix}
+    Write-Host "The following domains have been removed from the safe senders list: $($domains -join ', ')" -ForegroundColor green
 }
