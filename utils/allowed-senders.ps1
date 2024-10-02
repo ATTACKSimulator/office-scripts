@@ -8,7 +8,7 @@ function addAllowedSenders {
     $defaultPolicy = Get-HostedContentFilterPolicy -Identity Default
     if ($defaultPolicy) {
         # Update the existing default policy
-        Set-HostedContentFilterPolicy -Identity $spamFilterPolicy -AllowedSenderDomains @{Add=$domains}
+        Set-HostedContentFilterPolicy -Identity $defaultPolicy.Identity -AllowedSenderDomains @{Add=$domains}
         Write-Host "Updated the default Antispam Inbound Policy with the new allowed domains." -ForegroundColor green
     } else {
         throw "No default Antispam Inbound Policy found."
@@ -26,7 +26,7 @@ function removeAllowedSenders {
     if ($defaultPolicy) {
         # Remove the domains to the Allowed Senders and Domains list
         Write-Host "Removing domains: $domains"
-        Set-HostedContentFilterPolicy -Identity Default -AllowedSenderDomains @{Remove=$domains}
+        Set-HostedContentFilterPolicy -Identity $defaultPolicy.Identity -AllowedSenderDomains @{Remove=$domains}
     } else {
         Write-Host "No default Antispam Inbound Policy found." -ForegroundColor red
     }
