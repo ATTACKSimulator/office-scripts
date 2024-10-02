@@ -21,5 +21,7 @@ try {
     addDefender -ips $ips -emailDomains $emailDomains -landingDomains $landingDomains
 } catch {
     Write-Host $_ -ForegroundColor red
+    # show the file path and line number where the error occurred
+    Write-Host $_.InvocationInfo.PositionMessage -ForegroundColor red
     Write-Host "An error occurred. Please try again." -ForegroundColor red
 }
