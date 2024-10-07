@@ -7,7 +7,7 @@
 . "./utils/safe-urls.ps1"
 . "./utils/defender.ps1"
 
-prompt -message "This script will whitelist ATTACK Simulator in Office 365. This script combines the following scripts: _transport-rule-add.ps1, _safe-senders-add.ps1, and _allowed-senders-add.ps1. A login prompt will appear shortly."
+prompt -message "This script will whitelist ATTACK Simulator in Office 365. This script combines the following scripts: _transport-rule-add.ps1, _safe-senders-add.ps1, _safe-urls-add.ps1, _allowed-senders-add.ps1 and _defender-add.ps1. A login prompt will appear shortly."
 
 $ips = downloadIps
 $emailDomains = downloadEmailDomains
