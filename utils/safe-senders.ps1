@@ -1,20 +1,36 @@
+function Add-AtPrefix {
+    param(
+        [string[]]$domains
+    )
+
+    $domains = $domains | ForEach-Object {
+        if ($_ -notmatch "^@") {
+            "@" + $_
+        } else {
+            $_
+        }
+    }
+
+    return $domains
+}
+
 function addSafeSenders {
     param(
         [string[]]$domains
     )
 
+    $domains = $domains + (Add-AtPrefix -domains $domains)
+
     $mailboxes = Get-Mailbox
     foreach ($mailbox in $mailboxes) {
         Set-MailboxJunkEmailConfiguration -Identity $mailbox.Identity -TrustedSendersAndDomains @{Add=$domains}
-        Write-Host "The following domains have been added to the safe senders list for $($mailbox.Identity): $($domains -join ', ')" -ForegroundColor green
+        Write-Host "The following domains have been added to the safe senders list for $($mailbox.Identity): $($domains -join ', ') \n" -ForegroundColor green
     }
-
-    Write-Host "The following domains have been added to the safe senders list: $($domains -join ', ')" -ForegroundColor green
 }
 
 function checkSafeSenders {
     Write-Host "Type an email address to check if it has the correct safe senders configuration."
-    $email = Read-Host "Email address (or presse enter to use a random one from your account)"
+    $email = Read-Host "Email address (or press enter to use a random one from your account)"
 
     # If the user didn't provide an email address, use a random one from the account that is a real mailbox
     if ($email -eq "") {
@@ -38,10 +54,11 @@ function removeSafeSenders {
         [string[]]$domains
     )
 
+    $domains = $domains + (Add-AtPrefix -domains $domains)
+
     $mailboxes = Get-Mailbox
     foreach ($mailbox in $mailboxes) {
         Set-MailboxJunkEmailConfiguration -Identity $mailbox.Identity -TrustedSendersAndDomains @{Remove=$domains}
-        Write-Host "The following domains have been removed from the safe senders list for $($mailbox.Identity): $($domains -join ', ')" -ForegroundColor green
+        Write-Host "The following domains have been removed from the safe senders list for $($mailbox.Identity): $($domains -join ', ') \n" -ForegroundColor green
     }
-    Write-Host "The following domains have been removed from the safe senders list: $($domains -join ', ')" -ForegroundColor green
 }
