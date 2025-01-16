@@ -4,4 +4,5 @@
 
 prompt -message "This script will check an account's safe senders. A login prompt will appear shortly."
 connect
+
 checkSafeSenders

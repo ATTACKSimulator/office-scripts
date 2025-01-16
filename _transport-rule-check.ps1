@@ -4,4 +4,5 @@
 
 prompt -message "This script will check if the transport rule for ATTACK Simulator exists. A login prompt will appear shortly."
 connect
+
 checkTransportRule

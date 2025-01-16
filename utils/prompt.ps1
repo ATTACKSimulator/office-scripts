@@ -3,12 +3,10 @@ function prompt {
         [string]$message
     )
     Write-Host $message
-    Write-Host "Do you want to continue? (Y/n)"
+    Write-Host "[?] Do you want to continue? (Y/n)" -ForegroundColor Magenta
     $response = Read-Host
-    if ($response -eq 'Y' -or $response -eq 'y' -or $response -eq '') {
-        Write-Host "Continuing the script..."        
-    } else {
-        Write-Host "Script execution stopped."
+    if ($response -ne 'Y' -and $response -ne 'y' -and $response -ne '') {
+        Write-Host "Script execution stopped." -ForegroundColor Red
         exit
     }
 }

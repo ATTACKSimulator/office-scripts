@@ -6,6 +6,7 @@ function downloadData {
     $response = Invoke-WebRequest -Uri $url
     $data = $response.Content -split "`n"
 
+    Write-Host "Data downloaded successfully." -ForegroundColor Green
     return $data
 }
 
