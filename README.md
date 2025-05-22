@@ -1,6 +1,5 @@
 https://github.com/user-attachments/assets/62bb1e3e-7ac9-4ce4-82fa-f320b6b80574
 
-
 # ATTACK Simulator Office Scripts
 
 Welcome to the ATTACK Simulator Office Scripts repository!
@@ -33,33 +32,39 @@ Before using these scripts, ensure you have:
 
 This repository includes the following scripts:
 
-### Spam Filter Policy Scripts
+---
 
-- **`_allowed-senders-add.ps1`**: Adds domains to the allowed senders list in a spam filter policy.
-- **`_allowed-senders-check.ps1`**: Checks if specified domains are in the allowed senders list.
-- **`_allowed-senders-remove.ps1`**: Removes domains from the allowed senders list.
+### What Are Allowed Senders, Safe Senders, Transport Rules, and Defender Settings?
 
-### Safe Senders Scripts
+- **Allowed Senders**: These are email addresses or domains that you trust. Adding them to the allowed senders list helps make sure emails from these sources are not sent to your spam or junk folder.
 
-- **`_safe-senders-add.ps1`**: Adds domains to the safe senders list for all mailboxes.
-- **`_safe-senders-check.ps1`**: Checks the safe senders configuration for a specific mailbox.
-- **`_safe-senders-remove.ps1`**: Removes domains from the safe senders list for all mailboxes.
+- **Safe Senders**: These are trusted senders added to each user's mailbox. Marking a sender as safe helps ensure their emails (including images and links) always appear correctly in Outlook, and are not blocked or sent to junk.
 
-### Transport Rule Scripts
+- **Transport Rules**: These are special rules set by your organization to control how emails are handled. For example, a transport rule can make sure important emails from ATTACK Simulator are always delivered, even if they look suspicious.
 
-- **`_transport-rule-add.ps1`**: Adds a transport rule to handle emails based on specific headers.
-- **`_transport-rule-check.ps1`**: Checks the existence and details of a specified transport rule.
-- **`_transport-rule-remove.ps1`**: Removes a specified transport rule.
+- **Defender Settings**: These are security settings in Microsoft 365 Defender that help prevent good emails from being blocked by mistake. Adding ATTACK Simulator to these lists helps make sure your phishing tests work as expected.
 
-### Defender Scripts
+---
 
-- **`_defender-add.ps1`**: Adds a rules to Microsoft 365 Defender.
-- **`_defender-check.ps1`**: Checks the existence of the required rules in Microsoft 365 Defender.
-- **`_defender-remove.ps1`**: Removes ATTACK Simulator rules from Microsoft 365 Defender.
+### Script Details
 
-### General Scripts
+- **`_allowed-senders-add.ps1`**: Lets Microsoft 365 know that emails from ATTACK Simulator are safe, so they don't go to spam.
+- **`_allowed-senders-check.ps1`**: Checks if ATTACK Simulator is already marked as safe.
+- **`_allowed-senders-remove.ps1`**: Removes ATTACK Simulator from the safe list, so their emails might go to spam again.
 
-- **`whitelist.ps1`**: A general-purpose script for adding all ATTACK Simulator whitelist settings. It combines the \_allowed-senders-add.ps1, \_safe-senders-add.ps1, \_transport-rule-add.ps1 and \_defender-add.ps1 scripts.
+- **`_safe-senders-add.ps1`**: Makes sure emails from ATTACK Simulator always show up in your inbox, with images and links working in Outlook.
+- **`_safe-senders-check.ps1`**: Lets you check if ATTACK Simulator is set as safe for a specific mailbox.
+- **`_safe-senders-remove.ps1`**: Stops treating ATTACK Simulator as safe, so their emails might be blocked or have images hidden.
+
+- **`_transport-rule-add.ps1`**: Sets up a rule so that emails from ATTACK Simulator are always delivered, even if they look suspicious.
+- **`_transport-rule-check.ps1`**: Checks if this special delivery rule is in place.
+- **`_transport-rule-remove.ps1`**: Removes the rule, so emails from ATTACK Simulator are treated like any other email.
+
+- **`_defender-add.ps1`**: Tells Microsoft 365 Defender not to block or filter emails from ATTACK Simulator, so your phishing tests work.
+- **`_defender-check.ps1`**: Checks if Defender is set up to allow ATTACK Simulator emails.
+- **`_defender-remove.ps1`**: Removes ATTACK Simulator from Defender's allow list, so their emails might be blocked again.
+
+- **`whitelist.ps1`**: Runs all the above steps at once, making sure ATTACK Simulator emails are delivered and work as intended for your tests.
 
 ## Usage
 
@@ -87,6 +92,29 @@ This repository includes the following scripts:
    ```powershell
    ./_allowed-senders-remove.ps1
    ```
+
+### Load Images Automatically in Outlook
+
+If you want to make sure that images and links in ATTACK Simulator emails always load in Outlook (and are not blocked or hidden), run:
+
+```powershell
+./_safe-senders-add.ps1
+```
+
+This will add ATTACK Simulator to the safe senders list for all mailboxes, so images and content display without warnings.
+
+### Remove All ATTACK Simulator Settings
+
+To undo all changes and remove ATTACK Simulator from all allow lists, safe senders, transport rules, and Defender settings, run each of the following scripts:
+
+```powershell
+./_allowed-senders-remove.ps1
+./_safe-senders-remove.ps1
+./_transport-rule-remove.ps1
+./_defender-remove.ps1
+```
+
+This will restore your Microsoft 365 environment to its previous state, as if ATTACK Simulator was never added.
 
 3. **Monitor and Review:**
 
