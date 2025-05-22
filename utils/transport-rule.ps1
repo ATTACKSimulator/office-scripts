@@ -1,8 +1,7 @@
 function addTransportRule {
     param (
         [string]$ruleName = "ATTACK Simulator",
-        [string]$headerName = "x-ats-simulation",
-        [string]$headerValue = "true",
+        [string]$ips = "168.245.96.234",
         [string]$priority = "0",
         [string]$mode = "Enforce",
         [string]$comments = "Rule to handle emails from ATTACK Simulator"
@@ -12,7 +11,7 @@ function addTransportRule {
     if ($rule -eq $null) {
         Write-Host "Creating the transport rule '$ruleName'..."
         New-TransportRule -Name $ruleName `
-        -HeaderMatchesMessageHeader $headerName -HeaderMatchesPatterns $headerValue `
+        -SenderIpRanges $ips `
         -SetSCL "-1" `
         -SetHeaderName "X-MS-Exchange-Organization-SkipSafeLinksProcessing" -SetHeaderValue "1" `
         -Priority $priority `
